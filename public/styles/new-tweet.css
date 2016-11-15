@@ -1,0 +1,35 @@
+.new-tweet {
+  background-color: #eeeeee ;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.new-tweet textarea {
+  width: 100%;
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.new-tweet input {
+  margin-top: .75rem;
+  font-size: 1rem;
+}
+
+.new-tweet h2 {
+  padding-bottom: 2px;
+  display: inline-block;
+  width: 100%;
+  border-bottom: 1px solid black;
+  margin: 1rem 0;
+  font-size: 1.5rem;
+}
+
+.new-tweet .counter {
+  float: right;
+  padding-top: 0.75em;
+  font-size: 1rem;
+  font-style: italic;
+}

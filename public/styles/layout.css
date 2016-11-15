@@ -15,10 +15,23 @@ html {
  */
 
 body {
-  margin: 0;
+  margin: 0 0 0 0;
   color: #244751;
   background-color: #eee;
+  font: 10px 'Roboto Condensed', sans-serif;
 }
+
+main {
+  padding-top: 140px;
+  padding-left: 2em;
+  padding-right: 2em;
+  margin: 0 auto;
+  width: 450px;
+  background: #ffffff;
+  height: 800px;
+}
+
+
 
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
