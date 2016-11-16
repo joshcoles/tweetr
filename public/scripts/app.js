@@ -50,8 +50,28 @@ $(document).ready(function() {
         "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
       },
       "created_at": 1461113796368
+    },
+    {
+      "user": {
+        "name": "Johann von Goethe",
+        "avatars": {
+          "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
+          "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
+          "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
+        },
+        "handle": "@johann49"
+      },
+      "content": {
+        "text": "<script>alert('uh oh!');</script>"
+      },
+      "created_at": 1461113796368
     }
   ];
+
+
+
+
+
 
   //=================================================================
 
@@ -68,13 +88,27 @@ $(document).ready(function() {
 
   function createTweetElement(tweet) {
 
+    function escape(str) {
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    }
+
+    var content = tweet.content.text;
+    var safeContent = escape(content);
+
     var name = tweet.user.name;
     var avatars = tweet.user.avatars.small;
     var handle = tweet.user.handle;
-    var content = tweet.content.text;
     var epoch = tweet.created_at;
     var newDate = new Date(epoch);
     var stringDate = newDate.toUTCString().split("").slice(0, 16).join("");
+
+function escape(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
 
   tweet = $(`  <article class="tweets">
             <div class="tweets-header">
@@ -87,7 +121,7 @@ $(document).ready(function() {
               </header>
             </div>
             <div class="body">
-            ${content}
+            ${safeContent}
             </div>
             <div class="tweets-footer">
               <footer>
