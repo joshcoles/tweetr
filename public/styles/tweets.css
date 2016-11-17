@@ -3,22 +3,27 @@
   opacity: 0.7;
 }
 
-#tweet-container:hover  {
+#tweet-container {
   opacity: 1;
 }
 
-#tweet-container:hover i {
+/*#tweet-container i {
   opacity: 1;
   float: right;
   padding: 2px;
   color: #00a087;
-}
+}*/
 
 .tweets {
   border: 1px solid grey;
   background-color: #fff;
   margin-top: 1.5em;
   border-radius: 10px;
+  opacity: .7;
+}
+
+.tweets:hover {
+  opacity: 1;
 }
 
 .tweets .body {
@@ -61,15 +66,17 @@
 
 .tweets footer {
   font-size: .5rem;
+
 }
 
 .tweets-footer i {
   float: right;
   padding: 2px;
   opacity: 0;
+  color: #00a087;
 }
 
-.tweets-footer:hover i {
+.tweets:hover i {
   float: right;
   padding: 2px;
   opacity: 1;

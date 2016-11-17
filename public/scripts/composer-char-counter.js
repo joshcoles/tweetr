@@ -3,6 +3,7 @@ $(document).ready(function() {
 //accessing textarea node
 //on 'keyup' event
     $('.container .new-tweet textarea').on('input', function(event) {
+      const counter = $(this).parent().find('.counter')
 //beginning characters
       var charsAvailable = 140;
 //$(this) refers to data being passed into textarea
@@ -12,14 +13,19 @@ $(document).ready(function() {
       var backwardsCounter = charsAvailable - lengthOfContent;
 //traversing through DOM to access .counter node
 //assign value of that to content of backwardsCounter
-    $(this).parent().find('.counter').text(backwardsCounter);
+      counter.text(backwardsCounter);
 //alternatively, the code below would work
 //$('.counter').text(backwardsCounter);
 //change css of .counter node if it is below zero
       if (backwardsCounter < 0) {
-        $(this).parent().find('.counter').css("color", "red");
+        counter.css("color", "red");
+        // alert("Too long!")
+        $(this).next().attr("disabled", true);
       } else {
-        $(this).parent().find('.counter').css('color', "")
+        counter.css('color', "");
+        $(this).next().attr("disabled", false);
       }
   });
 });
+
+

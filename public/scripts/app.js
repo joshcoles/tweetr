@@ -4,74 +4,13 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-$(document).ready(function() {
+$(function() {
 
-  var tweetData = [
-    {
-      "user": {
-        "name": "Newton",
-        "avatars": {
-          "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-          "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-          "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-        },
-        "handle": "@SirIsaac"
-      },
-      "content": {
-        "text": "If I have seen further it is by standing on the shoulders of giants"
-      },
-      "created_at": 1461116232227
-    },
-    {
-      "user": {
-        "name": "Descartes",
-        "avatars": {
-          "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-          "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-          "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-        },
-        "handle": "@rd" },
-      "content": {
-        "text": "Je pense , donc je suis"
-      },
-      "created_at": 1461113959088
-    },
-    {
-      "user": {
-        "name": "Johann von Goethe",
-        "avatars": {
-          "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-          "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-          "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-        },
-        "handle": "@johann49"
-      },
-      "content": {
-        "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-      },
-      "created_at": 1461113796368
-    },
-    {
-      "user": {
-        "name": "Johann von Goethe",
-        "avatars": {
-          "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-          "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-          "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-        },
-        "handle": "@johann49"
-      },
-      "content": {
-        "text": "<script>alert('uh oh!');</script>"
-      },
-      "created_at": 1461113796368
-    }
-  ];
+  const MAXTWEETLENGTH = 140;
 
-
-
-
-
+  const isAllowableLength = (tweet) => {
+    return tweet.length <= MAXTWEETLENGTH;
+  }
 
   //=================================================================
 
@@ -80,7 +19,7 @@ $(document).ready(function() {
 
     tweets.forEach(function(tweet) {
       var element = createTweetElement(tweet);
-      parentElement.append(element);
+      parentElement.prepend(element);
     });
   }
 
@@ -104,41 +43,85 @@ $(document).ready(function() {
     var newDate = new Date(epoch);
     var stringDate = newDate.toUTCString().split("").slice(0, 16).join("");
 
-function escape(str) {
-  var div = document.createElement('div');
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-}
+    function escape(str) {
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    }
 
-  tweet = $(`  <article class="tweets">
-            <div class="tweets-header">
-              <header>
-              <img src="${avatars}">
-                <b>${name}</b>
-                <div class="tweetr-handle">
-                ${handle}
-                </div>
-              </header>
-            </div>
-            <div class="body">
-            ${safeContent}
-            </div>
-            <div class="tweets-footer">
-              <footer>
-                ${stringDate}
-                <i class="fa fa-heart" aria-hidden="true"></i>
-                <i class="fa fa-retweet" aria-hidden="true"></i>
-                <i class="fa fa-flag" aria-hidden="true"></i>
-              </footer>
-            </div>
-          </article>`);
+    tweet = $(`  <article class="tweets">
+              <div class="tweets-header">
+                <header>
+                <img src="${avatars}">
+                  <b>${name}</b>
+                  <div class="tweetr-handle">
+                  ${handle}
+                  </div>
+                </header>
+              </div>
+              <div class="body">
+              ${safeContent}
+              </div>
+              <div class="tweets-footer">
+                <footer>
+                  ${stringDate}
+                  <i class="fa fa-heart" aria-hidden="true"></i>
+                  <i class="fa fa-retweet" aria-hidden="true"></i>
+                  <i class="fa fa-flag" aria-hidden="true"></i>
+                </footer>
+              </div>
+            </article>`);
 
-  return tweet;
+
+      return tweet;
   };
 
-renderTweets(tweetData)
+  $('form[action="/tweets"]').on('submit', function (event) {
+
+    event.preventDefault();
+    var tweetInput = $(this);
+    const tweetContent = tweetInput.serialize().split("=")[1];
+
+    if (tweetContent.length === 0) {
+      alert("Whoops, you tried to send an empty tweet! Try entering some text.")
+      return false;
+    }
+
+    if (isAllowableLength(tweetContent)) {
+      console.log("ajax sent")
+      $.ajax({
+        method: 'POST',
+        url: tweetInput.attr('action'),
+        data: tweetInput.find("textarea").serialize()
+      }).done(function () {
+        loadTweets();
+        $('textarea').val('');
+      });
+    }
+
+    $("#configForm").trigger('reset');
+    $(".counter").text(140);
+
+  });
+
+  function loadTweets() {
+
+    $.ajax({
+      method: 'GET',
+      url: '/tweets',
+      dataType: 'json',
+      success: function(tweetData) {
+        renderTweets(tweetData);
+      }
+    });
+  }
+
+  loadTweets();
 
 });
+
+
+
 
 
 
