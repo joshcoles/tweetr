@@ -12,7 +12,8 @@ $(function() {
     return tweet.length <= MAXTWEETLENGTH;
   }
 
-  //=================================================================
+  $(".new-tweet").hide();
+  //=======================================================
 
   function renderTweets(tweets) {
     var parentElement = $('#tweet-container').html('');
@@ -43,11 +44,6 @@ $(function() {
     var newDate = new Date(epoch);
     var stringDate = newDate.toUTCString().split("").slice(0, 16).join("");
 
-    function escape(str) {
-      var div = document.createElement('div');
-      div.appendChild(document.createTextNode(str));
-      return div.innerHTML;
-    }
 
     tweet = $(`  <article class="tweets">
               <div class="tweets-header">
@@ -118,8 +114,24 @@ $(function() {
 
   loadTweets();
 
+
+$("#nav-bar #header-button").on("click", function() {
+    $(".new-tweet").slideToggle(500, function() {
+    });
+    $( "#content-text" ).focus();
+  });
+
 });
 
+
+
+
+
+// $( "#clickme" ).click(function() {
+//   $( "#book" ).slideDown( "slow", function() {
+//     // Animation complete.
+//   });
+// });
 
 
 
