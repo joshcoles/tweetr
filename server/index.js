@@ -11,7 +11,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // The in-memory database of tweets. It's a basic object with an array in it.
+
+
+//replace this with a connection to mongo 'db'
 const db = require("./lib/in-memory-db");
+
+
+// 1. connect to mongo, until you get a mongo "db"
+
 
 // The `data-helpers` module provides an interface to the database of tweets.
 // This simple interface layer has a big benefit: we could switch out the

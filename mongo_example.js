@@ -11,8 +11,7 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
 
   console.log(`Connected to mongodb: ${MONGODB_URI}`);
 
-
-  function getTweets(callback) {
+  /*var theTweets = */ function getTweets(callback) {
     db.collection("tweets").find().toArray(callback);
   }
 
@@ -23,7 +22,11 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
     console.log("Logging each tweet:");
     for (let tweet of tweets) {
       console.log(tweet);
+      // return tweet;
     }
+
     db.close();
   });
 });
+
+// module.exports = theTweets;
