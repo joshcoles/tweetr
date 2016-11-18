@@ -16,8 +16,11 @@
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
     <link rel="stylesheet" href="/styles/tweets.css" type="text/css" />
 
+    <!-- For font-awesome heart/retweet/flag icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+    <!-- For Moment.js (libary to help with relative time stamps) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
@@ -34,21 +37,22 @@
       <img class="logo" src="/images/bird.png">
       <span class="header">Tweeter</span>
       <div id="header-button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-Compose</div>
+      Compose
+      </div>
     </nav>
 
     <!-- Page-specific (main) content here -->
     <main class="container">
       <section class="new-tweet">
-      <h2>Compose Tweet</h2>
+        <h2>Compose Tweet</h2>
         <form method="post" action="/tweets" id="configForm">
-        <textarea name="text" placeholder="What are you humming about?" id="content-text"></textarea>
-        <input type="submit" value="Tweet">
-        <span class="counter" id="counter">140</span>
+          <textarea name="text" placeholder="What are you humming about?" id="content-text"></textarea>
+          <input type="submit" value="Tweet">
+          <span class="counter" id="counter">140</span>
         </form>
       </section>
       <section id="tweet-container">
-
+      <!-- Tweets go here -->
       </section>
     </main>
   </body>

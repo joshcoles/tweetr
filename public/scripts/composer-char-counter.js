@@ -1,27 +1,27 @@
 //begin by waiting for document to be ready
 $(document).ready(function() {
 //accessing textarea node
-//on 'keyup' event
+//on input to textarea
     $('.container .new-tweet textarea').on('input', function(event) {
+//establish counter
       const counter = $(this).parent().find('.counter')
-//beginning characters
+//beginning characters available
       var charsAvailable = 140;
 //$(this) refers to data being passed into textarea
 //get length of value of that data
       var lengthOfContent = $(this).val().length;
 //assign backwardsCounter variable to difference
       var backwardsCounter = charsAvailable - lengthOfContent;
-//traversing through DOM to access .counter node
-//assign value of that to content of backwardsCounter
+//re-assigne text of counter to value of backwardsCounter;
       counter.text(backwardsCounter);
-//alternatively, the code below would work
-//$('.counter').text(backwardsCounter);
-//change css of .counter node if it is below zero
+//error handling if counter goes below zero
       if (backwardsCounter < 0) {
+//change css of .counter node if it is below zero
         counter.css("color", "red");
-        // alert("Too long!")
+//also disable 'tweet' button, which is access by walking the dom to the 'next()' item
         $(this).next().attr("disabled", true);
       } else {
+//if counter is not below zero, all is well
         counter.css('color', "");
         $(this).next().attr("disabled", false);
       }

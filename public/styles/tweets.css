@@ -1,24 +1,13 @@
 #tweet-container {
   margin-top: 1.5em;
-  opacity: 0.7;
-}
-
-#tweet-container {
   opacity: 1;
 }
-
-/*#tweet-container i {
-  opacity: 1;
-  float: right;
-  padding: 2px;
-  color: #00a087;
-}*/
 
 .tweets {
-  border: 1px solid grey;
   background-color: #fff;
-  margin-top: 1.5em;
+  border: 1px solid grey;
   border-radius: 10px;
+  margin-top: 1.5em;
   opacity: .7;
 }
 
@@ -31,6 +20,35 @@
   margin-right: 10px;
   margin-bottom: 5px;
   font-size: .75rem;
+  word-wrap: break-word;
+}
+
+.tweets .tweets-header {
+  background-color: #eee;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  margin-bottom: 2em;
+  padding: 5px 5px 5px 5px;
+}
+
+.tweets header {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-size: 1.5rem;
+  margin: 0.5em;
+  margin-top: 0;
+  padding: 5px 5px 20px 5px;
+  width: 100%;
+}
+
+.tweets-header img {
+  border-radius: 7px;
+  display: inline-block;
+  float: left;
+  margin: 4px;
+  margin-left: -10px;
+  margin-right: 8px;
+  margin-top: 0;
 }
 
 .tweets .tweetr-handle {
@@ -42,38 +60,20 @@
 }
 
 .tweets .tweets-footer {
-  border-top: 1px solid grey;
   background-color: #fff;
-  /*border-radius: 10px;*/
+  border-top: 1px solid grey;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: .75rem;
   margin-top: 2em;
   padding: 10px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
-.tweets .tweets-footer footer {
-  font-size: .75rem;
-}
-
-.tweets .tweets-header {
-  /*border-bottom: 1px solid grey;*/
-  background-color: #eee;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-  margin-bottom: 2em;
-  padding: 5px 5px 5px 5px;
-}
-
-.tweets footer {
-  font-size: .5rem;
-
 }
 
 .tweets-footer i {
-  float: right;
-  padding: 2px;
-  opacity: 0;
   color: #00a087;
+  float: right;
+  opacity: 0;
+  padding: 2px;
 }
 
 .tweets:hover i {
@@ -82,31 +82,51 @@
   opacity: 1;
 }
 
-.tweets header {
-  /*display: inline-block;*/
-  /*float: left;*/
-  font-size: 1.5rem;
-  width: 100%;
-  margin: 0.5em;
-  margin-top: 0;
-  padding: 5px 5px 20px 5px;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
+/*Bonus*/
+
+.spinner:hover {
+  -webkit-animation-name: spin;
+  -webkit-animation-duration: 4000ms;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: spin;
+  -moz-animation-duration: 4000ms;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -ms-animation-name: spin;
+  -ms-animation-duration: 4000ms;
+  -ms-animation-iteration-count: infinite;
+  -ms-animation-timing-function: linear;
+
+  animation-name: spin;
+  animation-duration: 4000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
-.tweets-header img {
-  border-radius: 7px;
-  display: inline-block;
-  float: left;
-  margin: 4px;
-  margin-right: 8px;
-  margin-left: -10px;
-  margin-top: 0;
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
 }
 
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
 
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
 
-
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
 
 
 
